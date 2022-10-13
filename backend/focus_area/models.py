@@ -8,5 +8,5 @@ class FocusArea(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     focus_area = models.CharField(max_length = 150)
     task = models.CharField(max_length = 150)
-    time_of_task = models.DateTimeField()
-    day_of_week = models.DateTimeField()
+    time_of_task = models.TimeField()
+    day_of_week = models.DateField()

@@ -4,38 +4,24 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 
-from .models import FocusArea
-from .serializers import FocusAreaSerializer
+from .models import ProgressTracker
+from .serializers import ProgressTrackerSerializer
 
-# <<<<<<<<<<<<<<<<< EXAMPLE FOR STARTER CODE USE <<<<<<<<<<<<<<<<<
-
-
-# @api_view(['GET'])
-# @permission_classes([AllowAny])
-# def get_all_focus_areas(request):
-#     focus_areas = FocusArea.objects.all()
-#     serializer = FocusAreaSerializer(focus_areas, many=True)
-#     return Response(serializer.data, status=status.HTTP_200_OK)
-
-
+# Create your views here.
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_user_focus_area(request):
+def get_user_progress(request):
     if request.method == 'GET':
-        focus_areas = FocusArea.objects.filter(user_id=request.user.id)
-        serializer = FocusAreaSerializer(focus_areas, many=True)
+        progress_tracker = ProgressTracker.objects.filter(focus_area_id=request.user.id)
+        # either (focus_area_id=request.id) OR (focus_area_id=request.user.id)
+        serializer = ProgressTrackerSerializer(progress_tracker, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def post_user_focus_area(request):
-    print(
-        'User ', f"{request.user.id} {request.user.email} {request.user.username}")
+def post_user_progress(request):
     if request.method == 'POST':
-        serializer = FocusAreaSerializer(data=request.data)
+        serializer = ProgressTrackerSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -44,10 +30,10 @@ def post_user_focus_area(request):
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
-def edit_user_focus_area(request, pk):
-    focus_area = get_object_or_404(FocusArea, pk=pk)
+def edit_user_progress(request, pk):
+    progress = get_object_or_404(ProgressTracker, pk=pk)
     if request.method == 'PUT':
-        serializer = FocusAreaSerializer(focus_area, data=request.data)
+        serializer = ProgressTrackerSerializer(progress, data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -56,8 +42,8 @@ def edit_user_focus_area(request, pk):
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
-def delete_user_focus_area(request, pk):
-    focus_area = get_object_or_404(FocusArea, pk=pk)
+def delete_user_progress(request, pk):
+    progress = get_object_or_404(ProgressTracker, pk=pk)
     if request.method == 'DELETE':
-        focus_area.delete()
+        progress.delete()
         return Response(status.HTTP_204_NO_CONTENT)

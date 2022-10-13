@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'cars.apps.CarsConfig',  # This app is for example use only
     'focus_area',
+    'progress_tracker',
 ]
 
 MIDDLEWARE = [
