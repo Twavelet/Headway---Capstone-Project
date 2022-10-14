@@ -7,5 +7,6 @@ from .models import ProgressTracker
 class ProgressTrackerSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProgressTracker
-        fields = ['id', 'focus_area', 'measurement_of_progress']
+        fields = ['id', 'focus_area', 'measurement_of_progress', 'focus_area_id']
         depth = 1
+    focus_area_id = serializers.IntegerField(write_only=True)
