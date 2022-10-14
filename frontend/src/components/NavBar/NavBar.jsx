@@ -11,8 +11,9 @@ const Navbar = () => {
     <div className="navBar">
       <ul>
         <li className="brand">
-          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-            <b>React/Django JWT</b>
+          <Link to="/" style={{ textDecoration: "none", color: "white"}}>
+            <b>Headway</b>
+            {/* need to center this */}
           </Link>
         </li>
         <li>
