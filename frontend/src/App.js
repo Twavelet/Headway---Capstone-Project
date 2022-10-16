@@ -13,29 +13,29 @@ import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
-import { useEffect, useState } from "react";
-import axios from "axios";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
 
 
 function App() {
 
-const [quotes, setQuotes] = useState([])
+// const [quotes, setQuotes] = useState([])
  
-useEffect(() => {
-  getQuotes()
-}, [])
+// useEffect(() => {
+//   getQuotes()
+// }, [])
 
-async function getQuotes() {
-  try{
-    const response = await axios.get("https://type.fit/api/quotes");
-    console.log(response.data)
-    setQuotes(response.data);
+// async function getQuotes() {
+//   try{
+//     const response = await axios.get("https://type.fit/api/quotes");
+//     console.log(response.data)
+//     setQuotes(response.data);
 
-  }
-  catch(error){
-    console.log(error.response)
-  }
-}
+//   }
+//   catch(error){
+//     console.log(error.response)
+//   }
+// }
 
 
 
@@ -52,7 +52,7 @@ async function getQuotes() {
           }
         />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage parentQuotes ={quotes} />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
       <Footer />
     </div>

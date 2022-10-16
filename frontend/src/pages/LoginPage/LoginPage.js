@@ -5,43 +5,61 @@ import { Link } from "react-router-dom";
 import "./LoginPage.css";
 import { useState } from "react";
 import axios from "axios";
+import makeCancelable from 'makecancelable';
 
-
-const LoginPage = (props) => {
+const LoginPage = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
   const defaultValues = { username: "", password: "" };
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
     loginUser
   );
-  const [randomQuote, setRandomQuote] = useState([])
+  const [randomQuote, setRandomQuote] = useState([[{
+    "text": "What you give is what you get.",
+    "author": "Byron Pulsifer"
+  }]])
+  const [number, setNumber] = useState([0])
+  
+  
 
   useEffect(() => {
     getRandomQuote()
-  }, [props.parentQuotes]);
-
   
+  }, []);
 
+  async function getRandomQuote() {
+    try{
+      // debugger;
+      const response = await axios.get("https://type.fit/api/quotes");
+      setRandomQuote(response.data)
+      const quote = Math.floor(Math.random() * 1644)
+      setNumber(quote);
 
-
-async function getRandomQuote() {
-  const quote = Math.floor(Math.random() * 1644)
-  setRandomQuote(props.parentQuotes[quote])
-  console.log(quote)
-
+      
+    }
+    catch(error){
+      console.log(error.response)
+    }
+  }
+    
   
-}
-console.log(randomQuote)
+  console.log(randomQuote)
+  console.log(number)
+
   return (
     <>
     <div>
 
+       <>
        <h2>
-        {randomQuote && `"${randomQuote.text}"`}
-       </h2>
-       <h3>
-       {randomQuote && `~${randomQuote.author}`}
-       </h3>
+            {randomQuote[number].text}
+          </h2>
+          <h3>
+              {randomQuote[number].author}
+            </h3>
+            </>
+       
+
       
     </div>
     <div className="container">
