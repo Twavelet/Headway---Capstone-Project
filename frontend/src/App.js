@@ -19,7 +19,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
 
-// const [quotes, setQuotes] = useState([])
+// const [focusArea, setFocusArea] = useState([])
  
 // useEffect(() => {
 //   getQuotes()
