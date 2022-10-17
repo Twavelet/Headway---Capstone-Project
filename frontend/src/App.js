@@ -19,25 +19,6 @@ import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
 
-// const [focusArea, setFocusArea] = useState([])
- 
-// useEffect(() => {
-//   getQuotes()
-// }, [])
-
-// async function getQuotes() {
-//   try{
-//     const response = await axios.get("https://type.fit/api/quotes");
-//     console.log(response.data)
-//     setQuotes(response.data);
-
-//   }
-//   catch(error){
-//     console.log(error.response)
-//   }
-// }
-
-
 
   return (
     <div>

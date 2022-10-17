@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 
 import axios from "axios";
+import Calendar from "../../components/Calendar/Calendar";
 
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -90,6 +91,9 @@ const HomePage = (props) => {
             );
         })}
     </table>
+    <div>
+      <Calendar/>
+    </div>
       </>
   );
 };
