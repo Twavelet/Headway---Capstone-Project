@@ -10,3 +10,4 @@ class FocusArea(models.Model):
     task = models.CharField(max_length = 150)
     time_of_task = models.TimeField()
     day_of_week = models.DateField()
+    notes = models.CharField(max_length = 500, blank = True)

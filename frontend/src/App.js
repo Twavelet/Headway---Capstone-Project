@@ -13,6 +13,7 @@ import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+import FocusAreaTable from "./pages/FocusAreaTable/FocusAreaTable";
 // import { useEffect, useState } from "react";
 // import axios from "axios";
 
@@ -34,6 +35,7 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/table" element={<FocusAreaTable />} />
       </Routes>
       <Footer />
     </div>

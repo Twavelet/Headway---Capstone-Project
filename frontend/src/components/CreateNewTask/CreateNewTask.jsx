@@ -10,6 +10,7 @@ const CreateNewTask = (props) => {
     const [task, setTask] = useState([])
     const [time, setTime] = useState([])
     const [date, setDate] = useState([])
+    const [notes, setNotes] = useState([])
 
     async function handleSubmit(event){
         event.preventDefault();
@@ -20,6 +21,7 @@ const CreateNewTask = (props) => {
             task: task,
             time_of_task: time,
             day_of_week: date,
+            notes: notes
             
         }
         
@@ -57,6 +59,10 @@ const CreateNewTask = (props) => {
                 <div className='form-group'>
                     <label>Date</label>
                     <input placeholder='Enter the Date for your New Task:' className='form-control' type='date' value={date} onChange={(event) => setDate(event.target.value)}/>
+                </div>
+                <div className='form-group'>
+                    <label>Notes</label>
+                    <input placeholder='Enter Any Notes You May Have:' className='form-control' type='string' value={notes} onChange={(event) => setNotes(event.target.value)}/>
                 </div>
                 <div>
                     <button type='submit' className='btn btn-primary'>Submit</button>
