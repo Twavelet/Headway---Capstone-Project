@@ -13,7 +13,8 @@ const CreateNewTask = (props) => {
 
     async function handleSubmit(event){
         event.preventDefault();
-        
+        debugger
+        if (focusArea.length > 0 && task.length > 0  && time.length > 0  && date.length > 0 ){
         let newTask = {
             focus_area: focusArea,
             task: task,
@@ -21,7 +22,10 @@ const CreateNewTask = (props) => {
             day_of_week: date,
             
         }
+        
         props.addNewTask(newTask)
+        props.setShow(true)
+        
 
         let response = await axios.post('http://127.0.0.1:8000/focus/', newTask, {headers: {
             Authorization: "Bearer " + token,
@@ -30,6 +34,10 @@ const CreateNewTask = (props) => {
         
         console.log(response)
         console.log(newTask)
+    }
+    else(
+        alert("Incomplete Entry, Please Resubmit With All of the Fields Filled Out")
+    )
     }
 
         return(

@@ -101,7 +101,7 @@ const HomePage = (props) => {
               </tr>
             );
           })}
-        </table></>) : (<CreateNewTask addNewTask={addNewTask}/>)}
+        </table></>) : (<CreateNewTask addNewTask={addNewTask} setShow={setShow}/>)}
     
     <div>
       <Calendar/>
