@@ -4,15 +4,15 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 // import CreateNewTask from "../../components/CreateNewTask/CreateNewTask";
 import EditTask from "../../components/EditTask/EditTask";
-import { useNavigate } from "react-router-dom";
-
+// import { useNavigate } from "react-router-dom";
+import moment from 'moment';
 
 const FocusAreaTable = () => {
 
     const [user, token] = useAuth();
     const [focusArea, setFocusArea] = useState([]);
     const [count, setCount] = useState([])
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [show, setShow] = useState([true])
     const [edit, setEdit] = useState([])
     
@@ -57,11 +57,24 @@ const FocusAreaTable = () => {
 
     
 
-    async function handleEdit(userInfo) {
+    function handleEdit(userInfo) {
         console.log(userInfo)
         setShow(false)
         setEdit(userInfo)
+        let a = moment().toObject() ;
+        let b = Date()
+        let c = moment().format('YYYY-MM-DD HH:m:s')
+        if (c.includes(userInfo.time_of_task && userInfo.day_of_week)){
+            console.log(`It worked! ${c}`)
+        }
+        console.log(c)
     }
+
+    function handleTime(time){
+
+    }
+
+    
     
 
     
