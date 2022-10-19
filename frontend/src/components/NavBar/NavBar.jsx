@@ -20,7 +20,14 @@ const Navbar = () => {
           {user ? (
             <button onClick={() => navigate("/table")}>Focus Areas</button>
           ) : (
-            <button onClick={() => navigate("/login")}>Login</button>
+            null
+          )}
+        </li>
+        <li>
+          {user ? (
+            <button onClick={() => navigate("/addTask")}>Add Task</button>
+          ) : (
+            null
           )}
         </li>
         <li>

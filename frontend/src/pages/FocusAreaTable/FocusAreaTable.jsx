@@ -4,12 +4,15 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 // import CreateNewTask from "../../components/CreateNewTask/CreateNewTask";
 import EditTask from "../../components/EditTask/EditTask";
+import { useNavigate } from "react-router-dom";
 
 
 const FocusAreaTable = () => {
 
     const [user, token] = useAuth();
     const [focusArea, setFocusArea] = useState([]);
+    const [count, setCount] = useState([])
+    const navigate = useNavigate();
     const [show, setShow] = useState([true])
     const [edit, setEdit] = useState([])
     
@@ -18,7 +21,7 @@ const FocusAreaTable = () => {
     
         fetchFocusArea()
         
-      }, []);
+      }, [token, count]);
     
       
       const fetchFocusArea = async () => {
@@ -35,10 +38,7 @@ const FocusAreaTable = () => {
       };
 
 
-      function addNewTask(task){
-        let tempTask = [task, ...focusArea]
-        setFocusArea(tempTask);
-    }
+      
 
 
     console.log(focusArea)
@@ -46,24 +46,28 @@ const FocusAreaTable = () => {
 
     async function handleDelete(del) {
         console.log(del)
+        
         return await axios.delete(`http://127.0.0.1:8000/focus/delete/${del.id}/`, {
             headers: {
                 Authorization: "Bearer " + token,
-            }, }) 
+            }, }) && setCount(count+1)
+            
+
         } 
 
     
 
-    async function handleEdit(edit) {
-        console.log(edit)
-        return (setEdit(edit))
-
+    async function handleEdit(userInfo) {
+        console.log(userInfo)
+        setShow(false)
+        setEdit(userInfo)
     }
     
 
     
     return(
-        <><> {show ? (
+        <><> 
+        {show ? (
                 <><div className="container">
                 <h1>Welcome Back {user.username}!</h1>
             </div><table className="table table-striped bg-info p-2 text-dark bg-opacity-10">
@@ -74,8 +78,9 @@ const FocusAreaTable = () => {
                             <th scope="col">Time</th>
                             <th scope="col">Day</th>
                             <th scope="col">Notes</th>
-                            <th scope="col">Delete Task</th>
-                            <th scope="col">Edit Task</th>
+                            <th scope="col">Completion</th>
+                            <th scope="col">Delete</th>
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
                     {focusArea.map((entry, index) => {
@@ -86,14 +91,17 @@ const FocusAreaTable = () => {
                                 <td>{entry.time_of_task}</td>
                                 <td>{entry.day_of_week}</td>
                                 <td>{entry.notes}</td>
-                                <button onClick={() => handleDelete(entry)}>Delete Task</button>
-                                <button onClick={() => setShow(false) && handleEdit(entry)}>Edit Task</button>
+                                <td><input type="checkbox"/></td>
+                                <td><button onClick={() => handleDelete(entry)}>Delete</button></td>
+                                <td><button onClick={() => handleEdit(entry)}>Edit</button></td>
+                                
+                                
                             </tr>
                         );
                     })}
                 </table></>
-                        ) : (<EditTask setShow={setShow} edit={edit} />)
-        }
+                    ) : (<EditTask userInfo={edit} setShow = {setShow}/>)
+        } 
 
 
         
