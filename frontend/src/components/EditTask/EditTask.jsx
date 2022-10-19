@@ -42,7 +42,7 @@ const EditTask = (props) => {
             console.log(editedTask)
             
             navigate("/")
-            props.setShow(true)
+        
         }
         else(
             alert("Incomplete Entry, Please Resubmit With All of the Fields Filled Out")

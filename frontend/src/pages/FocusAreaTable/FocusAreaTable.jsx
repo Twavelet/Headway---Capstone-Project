@@ -100,7 +100,7 @@ const FocusAreaTable = () => {
                         );
                     })}
                 </table></>
-                    ) : (<EditTask userInfo={edit} setShow = {setShow}/>)
+                    ) : (<EditTask userInfo={edit}/>)
         } 
 
 
