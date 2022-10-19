@@ -2,21 +2,23 @@ import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import CreateNewTask from "../../components/CreateNewTask/CreateNewTask";
+// import CreateNewTask from "../../components/CreateNewTask/CreateNewTask";
+import EditTask from "../../components/EditTask/EditTask";
 
 
 const FocusAreaTable = () => {
 
     const [user, token] = useAuth();
     const [focusArea, setFocusArea] = useState([]);
-    // const [show, setShow] = useState([true])
+    const [show, setShow] = useState([true])
+    const [edit, setEdit] = useState([])
     
 
     useEffect(() => {
     
         fetchFocusArea()
         
-      }, [token]);
+      }, []);
     
       
       const fetchFocusArea = async () => {
@@ -42,7 +44,7 @@ const FocusAreaTable = () => {
     console.log(focusArea)
 
 
-    async function handleDelete(del) { 
+    async function handleDelete(del) {
         console.log(del)
         return await axios.delete(`http://127.0.0.1:8000/focus/delete/${del.id}/`, {
             headers: {
@@ -50,55 +52,56 @@ const FocusAreaTable = () => {
             }, }) 
         } 
 
+    
+
     async function handleEdit(edit) {
         console.log(edit)
-        
-        
+        return (setEdit(edit))
+
     }
     
 
     
     return(
-    <>
-    <div className="container">
-      <h1>Welcome Back {user.username}!</h1>
-    </div>
-    <><div>
+        <><> {show ? (
+                <><div className="container">
+                <h1>Welcome Back {user.username}!</h1>
+            </div><table className="table table-striped bg-info p-2 text-dark bg-opacity-10">
+                    <thead>
+                        <tr>
+                            <th scope="col">Focus Area</th>
+                            <th scope="col">Task</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Day</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col">Delete Task</th>
+                            <th scope="col">Edit Task</th>
+                        </tr>
+                    </thead>
+                    {focusArea.map((entry, index) => {
+                        return (
+                            <tr key={index}>
+                                <td>{entry.focus_area}</td>
+                                <td>{entry.task}</td>
+                                <td>{entry.time_of_task}</td>
+                                <td>{entry.day_of_week}</td>
+                                <td>{entry.notes}</td>
+                                <button onClick={() => handleDelete(entry)}>Delete Task</button>
+                                <button onClick={() => setShow(false) && handleEdit(entry)}>Edit Task</button>
+                            </tr>
+                        );
+                    })}
+                </table></>
+                        ) : (<EditTask setShow={setShow} edit={edit} />)
+        }
 
-      </div>
-      <table className="table table-striped bg-info p-2 text-dark bg-opacity-10">
-          <thead>
-            <tr>
-              <th scope="col">Focus Area</th>
-              <th scope="col">Task</th>
-              <th scope="col">Time</th>
-              <th scope="col">Day</th>
-              <th scope="col">Notes</th>
-              {/* <th scope="col">Add New Task</th> */}
-              <th scope="col">Delete New Task</th>
-              <th scope="col">Edit Task</th>
-            </tr>
-          </thead>
-          {focusArea.map((entry, index) => {
-            return (
-              <tr key={index}>
-                <td>{entry.focus_area}</td>
-                <td>{entry.task}</td>
-                <td>{entry.time_of_task}</td>
-                <td>{entry.day_of_week}</td>
-                <td>{entry.notes}</td>
-                
-                {/* <button onClick={() => setShow(false)}>Add Task</button> */}
-                <button onClick={() => handleDelete(entry)}>Delete Task</button>
-                <button onClick={() => handleEdit(entry)}>Edit Task</button>
-              </tr>
-            );
-          })}
-        </table></>
-        {/* <CreateNewTask addNewTask={addNewTask} setShow={setShow}/> */}
+
         
-        </>
-    )
-}
+                </></>
+
+                )
+    
+                
+    }
 
 export default FocusAreaTable;

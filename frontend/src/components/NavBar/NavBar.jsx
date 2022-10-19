@@ -18,18 +18,19 @@ const Navbar = () => {
         </li>
         <li>
           {user ? (
-            <button onClick={logoutUser}>Logout</button>
+            <button onClick={() => navigate("/table")}>Focus Areas</button>
           ) : (
             <button onClick={() => navigate("/login")}>Login</button>
           )}
         </li>
         <li>
           {user ? (
-            <button onClick={() => navigate("/table")}>Focus Areas</button>
+            <button onClick={logoutUser}>Logout</button>
           ) : (
             <button onClick={() => navigate("/login")}>Login</button>
           )}
         </li>
+        
       </ul>
     </div>
   );

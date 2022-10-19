@@ -14,7 +14,6 @@ const CreateNewTask = (props) => {
 
     async function handleSubmit(event){
         event.preventDefault();
-        debugger
         if (focusArea.length > 0 && task.length > 0  && time.length > 0  && date.length > 0 ){
         let newTask = {
             focus_area: focusArea,
