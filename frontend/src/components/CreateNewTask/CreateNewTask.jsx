@@ -13,6 +13,9 @@ const CreateNewTask = (props) => {
     const [time, setTime] = useState([])
     const [date, setDate] = useState([])
     const [notes, setNotes] = useState([])
+    const [completed, setCompleted] = useState([])
+
+    
 
     async function handleSubmit(event){
         event.preventDefault();
@@ -23,7 +26,6 @@ const CreateNewTask = (props) => {
             time_of_task: time,
             day_of_week: date,
             notes: notes
-            
         }
         
         props.addNewTask(newTask)
@@ -37,6 +39,9 @@ const CreateNewTask = (props) => {
         navigate("/")
         console.log(response)
         console.log(newTask)
+        
+
+        
     }
     else(
         alert("Incomplete Entry, Please Resubmit With All of the Fields Filled Out")
@@ -45,27 +50,29 @@ const CreateNewTask = (props) => {
 
     }
 
+
+
         return(
             <form onSubmit={handleSubmit} className="form-grid bg-info p-2 text-dark bg-opacity-10">
                 <div className='form-group'>
                     <label>Focus Area</label>
-                    <input defaultValue='Enter your Focus Area:' className='form-control' type='string' value={focusArea} onChange={(event) => setFocusArea(event.target.value)}/>
+                    <input placeHolder='Enter your Focus Area: ' className='form-control' type='string' value={focusArea} onChange={(event) => setFocusArea(event.target.value)}/>
                 </div>
                 <div className='form-group'>
                     <label>Task</label>
-                    <input defaultValue='Enter your New Task:' className='form-control' type='string' value={task} onChange={(event) => setTask(event.target.value)}/>
+                    <input placeHolder='Enter your New Task: ' className='form-control' type='string' value={task} onChange={(event) => setTask(event.target.value)}/>
                 </div>
                 <div className='form-group'>
                     <label>time</label>
-                    <input defaultValue='Enter the Time for your New Task:' className='form-control' type='time' value={time} onChange={(event) => setTime(event.target.value)}/>
+                    <input placeHolder='Enter the Time for your New Task: ' className='form-control' type='time' value={time} onChange={(event) => setTime(event.target.value)}/>
                 </div>
                 <div className='form-group'>
                     <label>Date</label>
-                    <input defaultValue='Enter the Date for your New Task:' className='form-control' type='date' value={date} onChange={(event) => setDate(event.target.value)}/>
+                    <input placeHolder='Enter the Date for your New Task: ' className='form-control' type='date' value={date} onChange={(event) => setDate(event.target.value)}/>
                 </div>
                 <div className='form-group'>
                     <label>Notes</label>
-                    <input defaultValue='Enter Any Notes You May Have:' className='form-control' type='string' value={notes} onChange={(event) => setNotes(event.target.value)}/>
+                    <input placeHolder='Enter Any Notes: ' className='form-control' type='string' value={notes} onChange={(event) => setNotes(event.target.value)}/>
                 </div>
                 <div>
                     <button type='submit' className='btn btn-primary'>Submit</button>

@@ -24,8 +24,8 @@ function App() {
 
   const [user, token] = useAuth();
     const [focusArea, setFocusArea] = useState([]);
-    // const [show, setShow] = useState([true])
-    // const [edit, setEdit] = useState([])
+    
+    
     
 
     useEffect(() => {
@@ -52,6 +52,8 @@ function App() {
         let tempTask = [task, ...focusArea]
         setFocusArea(tempTask);
     }
+
+  
 
   return (
     <div>

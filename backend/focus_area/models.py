@@ -1,3 +1,4 @@
+from email.policy import default
 from unittest.util import _MAX_LENGTH
 from django.db import models
 from authentication.models import User
@@ -11,3 +12,4 @@ class FocusArea(models.Model):
     time_of_task = models.TimeField()
     day_of_week = models.DateField()
     notes = models.CharField(max_length = 500, blank = True)
+    completed = models.BooleanField(default = False, blank = False )

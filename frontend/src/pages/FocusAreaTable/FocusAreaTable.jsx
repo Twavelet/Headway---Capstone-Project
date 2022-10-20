@@ -12,14 +12,13 @@ const FocusAreaTable = () => {
     const [user, token] = useAuth();
     const [focusArea, setFocusArea] = useState([]);
     const [count, setCount] = useState([])
-    // const navigate = useNavigate();
     const [show, setShow] = useState([true])
     const [edit, setEdit] = useState([])
     
 
     useEffect(() => {
     
-        fetchFocusArea()
+        fetchFocusArea() 
         
       }, [token, count]);
     
@@ -35,7 +34,27 @@ const FocusAreaTable = () => {
         } catch (error) {
           console.log(error.response.data);
         }
-      };
+    }
+
+    //     function alertReminder(focusArea){
+    //         let currentTime = moment().format('YYYY-MM-DD HH:m:s')
+    //             debugger
+    //             let findFalse = focusArea.filter((el) => {
+    //                return el.completed === false
+    //             })
+    //             let reminder = findFalse.filter((ele) => {
+    //                 if (currentTime.includes( ele.day_of_week && ele.time_of_task)){
+    //                         alert("Dont Break the Chain!") 
+    //                         console.log("Working")
+                            
+    //                     return reminder
+    //                     }
+                    
+    //             })
+                
+    //        };
+
+    //   ;
 
 
       
@@ -61,22 +80,69 @@ const FocusAreaTable = () => {
         console.log(userInfo)
         setShow(false)
         setEdit(userInfo)
-        let a = moment().toObject() ;
-        let b = Date()
-        let c = moment().format('YYYY-MM-DD HH:m:s')
-        if (c.includes(userInfo.time_of_task && userInfo.day_of_week)){
-            console.log(`It worked! ${c}`)
+        setCount(count+1)
+    }
+
+   
+
+    // function alertReminder(focusArea){
+        
+        // setTimeout(alertReminder, 3000)
+
+    async function handleTime(userInfo){
+        let currentTime = moment().format('YYYY-MM-DD HH:m:s')
+        if (currentTime.includes(userInfo.day_of_week && userInfo.time_of_task)){
+            alert("Dont Break the Chain!") 
+            console.log("Working")
         }
-        console.log(c)
+
+        if (userInfo.completed === false){
+        let bool = {
+            focus_area: userInfo.focus_area,
+            task: userInfo.task,
+            time_of_task: userInfo.time_of_task,
+            day_of_week: userInfo.day_of_week,
+            notes: userInfo.notes,
+            completed: true};
+
+        await axios.put(`http://127.0.0.1:8000/focus/put/${userInfo.id}/`, bool, {headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
     }
+        else if(userInfo.completed === true){
+            let bool = {
+                focus_area: userInfo.focus_area,
+                task: userInfo.task,
+                time_of_task: userInfo.time_of_task,
+                day_of_week: userInfo.day_of_week,
+                notes: userInfo.notes,
+                completed: false};
+    
+            await axios.put(`http://127.0.0.1:8000/focus/put/${userInfo.id}/`, bool, {headers: {
+                Authorization: "Bearer " + token,
+              },
+            })
+        }
 
-    function handleTime(time){
+        setCount(count + 1)
 
+        // let response = await axios.get("http://127.0.0.1:8000/focus/get/", {
+        //     headers: {
+        //       Authorization: "Bearer " + token,
+        //     },
+        //   });
+
+        // let target = response.filter((el) => {
+        //   return el.id === userInfo.id
+        // })
+        
+
+        
+        
+            
+        // console.log(currentTime)
     }
-
-    
-    
-
     
     return(
         <><> 
@@ -104,10 +170,9 @@ const FocusAreaTable = () => {
                                 <td>{entry.time_of_task}</td>
                                 <td>{entry.day_of_week}</td>
                                 <td>{entry.notes}</td>
-                                <td><input type="checkbox"/></td>
+                                <td><input type="checkbox" onClick={()=> handleTime(entry)}/></td>
                                 <td><button onClick={() => handleDelete(entry)}>Delete</button></td>
                                 <td><button onClick={() => handleEdit(entry)}>Edit</button></td>
-                                
                                 
                             </tr>
                         );

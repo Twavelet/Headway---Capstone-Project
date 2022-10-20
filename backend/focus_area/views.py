@@ -42,11 +42,18 @@ def post_user_focus_area(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['PUT'])
+@api_view(['PUT', 'PATCH'])
 @permission_classes([IsAuthenticated])
 def edit_user_focus_area(request, pk):
     focus_area = get_object_or_404(FocusArea, pk=pk)
     if request.method == 'PUT':
+        serializer = FocusAreaSerializer(focus_area, data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'PATCH':
         serializer = FocusAreaSerializer(focus_area, data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
