@@ -2,6 +2,11 @@ import React from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import { useEffect } from 'react'
+import 'bootstrap/dist/css/bootstrap.css';
+import '@fortawesome/fontawesome-free/css/all.css'; // needs additional webpack config!
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+// import bootstrapPlugin from '@fullcalendar/bootstrap';
 
 const Calendar = (props) => {
 
@@ -16,8 +21,9 @@ const Calendar = (props) => {
         let userEvents = props.userData.map((task) =>{
             return {
                 title: task.task,
-                date: task.day_of_week +" " + task.time_of_task
-                
+                date: task.day_of_week +" " + task.time_of_task,
+                color: task.color
+    
             }
         })
         return userEvents
@@ -26,7 +32,7 @@ const Calendar = (props) => {
 return (
     <div>
    {props.userData && (
-    <FullCalendar plugins={[ dayGridPlugin ]} initialView="dayGridMonth"
+    <FullCalendar plugins={[ dayGridPlugin, timeGridPlugin, listPlugin ]} initialView="dayGridMonth"
     events={getEvents()}
       />
    )}

@@ -13,7 +13,6 @@ const CreateNewTask = (props) => {
     const [time, setTime] = useState([])
     const [date, setDate] = useState([])
     const [notes, setNotes] = useState([])
-    const [completed, setCompleted] = useState([])
 
     
 

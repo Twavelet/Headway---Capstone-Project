@@ -13,3 +13,4 @@ class FocusArea(models.Model):
     day_of_week = models.DateField()
     notes = models.CharField(max_length = 500, blank = True)
     completed = models.BooleanField(default = False, blank = False )
+    color = models.CharField(max_length = 50, default = 'red')

@@ -104,7 +104,9 @@ const FocusAreaTable = (props) => {
             time_of_task: userInfo.time_of_task,
             day_of_week: userInfo.day_of_week,
             notes: userInfo.notes,
-            completed: true};
+            completed: true,
+            color: 'green'
+        };
 
         await axios.put(`http://127.0.0.1:8000/focus/put/${userInfo.id}/`, boolChange, {headers: {
             Authorization: "Bearer " + token,
@@ -118,7 +120,9 @@ const FocusAreaTable = (props) => {
                 time_of_task: userInfo.time_of_task,
                 day_of_week: userInfo.day_of_week,
                 notes: userInfo.notes,
-                completed: false};
+                completed: false,
+                color: 'red'
+            };
     
             await axios.put(`http://127.0.0.1:8000/focus/put/${userInfo.id}/`, boolChange, {headers: {
                 Authorization: "Bearer " + token,
@@ -128,6 +132,7 @@ const FocusAreaTable = (props) => {
 
         setCount(count + 1)
         props.setParentCount(count + 1)
+        navigate("/")
 
      
     }
