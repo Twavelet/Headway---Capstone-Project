@@ -34,6 +34,7 @@ const HomePage = (props) => {
       setRandomQuote(response.data)
       const quote = Math.floor(Math.random() * 1644)
       setNumber(quote);
+      props.setParentCount(props.count + 1)
 
     }
     catch(error){

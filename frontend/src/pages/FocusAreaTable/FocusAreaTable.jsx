@@ -4,21 +4,22 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 // import CreateNewTask from "../../components/CreateNewTask/CreateNewTask";
 import EditTask from "../../components/EditTask/EditTask";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import moment from 'moment';
 
-const FocusAreaTable = () => {
+const FocusAreaTable = (props) => {
 
     const [user, token] = useAuth();
     const [focusArea, setFocusArea] = useState([]);
     const [count, setCount] = useState([])
     const [show, setShow] = useState([true])
     const [edit, setEdit] = useState([])
+    const navigate = useNavigate()
     
 
     useEffect(() => {
     
-        fetchFocusArea() 
+        fetchFocusArea() && alertReminder(props.focusArea)
         
       }, [token, count]);
     
@@ -36,23 +37,22 @@ const FocusAreaTable = () => {
         }
     }
 
-    //     function alertReminder(focusArea){
-    //         let currentTime = moment().format('YYYY-MM-DD HH:m:s')
-    //             debugger
-    //             let findFalse = focusArea.filter((el) => {
-    //                return el.completed === false
-    //             })
-    //             let reminder = findFalse.filter((ele) => {
-    //                 if (currentTime.includes( ele.day_of_week && ele.time_of_task)){
-    //                         alert("Dont Break the Chain!") 
-    //                         console.log("Working")
+        function alertReminder(alert){
+            let currentTime = moment().format('YYYY-MM-DD HH:m:s')
+                let findFalse = alert.filter((el) => {
+                   return el.completed === false
+                })
+                let reminder = findFalse.filter((ele) => {
+                    if (currentTime.includes( ele.day_of_week && ele.time_of_task)){
+                            alert("Dont Break the Chain!") 
+                            console.log("Working")
                             
-    //                     return reminder
-    //                     }
+                        return reminder
+                        }
                     
-    //             })
+                })
                 
-    //        };
+           };
 
     //   ;
 
@@ -65,14 +65,17 @@ const FocusAreaTable = () => {
 
     async function handleDelete(del) {
         console.log(del)
-        
-        return await axios.delete(`http://127.0.0.1:8000/focus/delete/${del.id}/`, {
+        await axios.delete(`http://127.0.0.1:8000/focus/delete/${del.id}/`, {
             headers: {
                 Authorization: "Bearer " + token,
-            }, }) && setCount(count+1)
+            }, })
+            setCount(count+1)
+            props.setParentCount(count + 1)
+            return navigate("/")
             
+        
 
-        } 
+} 
 
     
 
@@ -81,13 +84,11 @@ const FocusAreaTable = () => {
         setShow(false)
         setEdit(userInfo)
         setCount(count+1)
+        props.setParentCount(count + 1)
     }
 
    
 
-    // function alertReminder(focusArea){
-        
-        // setTimeout(alertReminder, 3000)
 
     async function handleTime(userInfo){
         let currentTime = moment().format('YYYY-MM-DD HH:m:s')
@@ -97,7 +98,7 @@ const FocusAreaTable = () => {
         }
 
         if (userInfo.completed === false){
-        let bool = {
+        let boolChange = {
             focus_area: userInfo.focus_area,
             task: userInfo.task,
             time_of_task: userInfo.time_of_task,
@@ -105,13 +106,13 @@ const FocusAreaTable = () => {
             notes: userInfo.notes,
             completed: true};
 
-        await axios.put(`http://127.0.0.1:8000/focus/put/${userInfo.id}/`, bool, {headers: {
+        await axios.put(`http://127.0.0.1:8000/focus/put/${userInfo.id}/`, boolChange, {headers: {
             Authorization: "Bearer " + token,
           },
         })
     }
         else if(userInfo.completed === true){
-            let bool = {
+            let boolChange = {
                 focus_area: userInfo.focus_area,
                 task: userInfo.task,
                 time_of_task: userInfo.time_of_task,
@@ -119,29 +120,16 @@ const FocusAreaTable = () => {
                 notes: userInfo.notes,
                 completed: false};
     
-            await axios.put(`http://127.0.0.1:8000/focus/put/${userInfo.id}/`, bool, {headers: {
+            await axios.put(`http://127.0.0.1:8000/focus/put/${userInfo.id}/`, boolChange, {headers: {
                 Authorization: "Bearer " + token,
               },
             })
         }
 
         setCount(count + 1)
+        props.setParentCount(count + 1)
 
-        // let response = await axios.get("http://127.0.0.1:8000/focus/get/", {
-        //     headers: {
-        //       Authorization: "Bearer " + token,
-        //     },
-        //   });
-
-        // let target = response.filter((el) => {
-        //   return el.id === userInfo.id
-        // })
-        
-
-        
-        
-            
-        // console.log(currentTime)
+     
     }
     
     return(

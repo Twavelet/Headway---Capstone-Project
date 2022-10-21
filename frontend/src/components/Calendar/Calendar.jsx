@@ -1,22 +1,37 @@
 import React from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import { useEffect } from 'react'
 
 const Calendar = (props) => {
 
-    // props.userData
+    useEffect(()=>{
+        console.log(props.userData)
+    }, [props.userData])
+
     console.log(props.userData)
+    
+
+    function getEvents(){
+        let userEvents = props.userData.map((task) =>{
+            return {
+                title: task.task,
+                date: task.day_of_week +" " + task.time_of_task
+                
+            }
+        })
+        return userEvents
+
+    }
 return (
     <div>
+   {props.userData && (
     <FullCalendar plugins={[ dayGridPlugin ]} initialView="dayGridMonth"
-    events={[
-        // have to figure out how to map over the data -- not sure if i can do it inside of the instantiation of the FullCalendar
-        { title: props.userData[0].task, date: props.userData[0].day_of_week},
-        { title: 'event 2', date: '2019-04-02' }
-      ]}/>
-    
+    events={getEvents()}
+      />
+   )}
     </div>
-    
+   
 
 )
 }

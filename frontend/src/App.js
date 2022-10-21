@@ -23,7 +23,15 @@ import useAuth from "./hooks/useAuth";
 function App() {
 
   const [user, token] = useAuth();
-    const [focusArea, setFocusArea] = useState([]);
+  const [focusArea, setFocusArea] = useState([[{
+  "focus_area": "useState Test",
+  "task": "useState Test",
+  "time_of_task": "14:05:00",
+  "day_of_week": "2021-12-31",
+  "notes": "Test",
+  "completed": false
+}]]);
+const [parentCount, setParentCount] = useState([])
     
     
     
@@ -31,8 +39,9 @@ function App() {
     useEffect(() => {
     
         fetchFocusArea()
+        console.log(focusArea)
         
-      }, [token]);
+      }, [token, parentCount]);
     
       
       const fetchFocusArea = async () => {
@@ -63,13 +72,13 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage userData={focusArea}/>
+              <HomePage userData={focusArea} parentCount={parentCount} setParentCount={setParentCount}/>
             </PrivateRoute>
           }
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/table" element={<FocusAreaTable />} />
+        <Route path="/table" element={<FocusAreaTable focusArea={focusArea} setParentCount={setParentCount} />} />
         <Route path="/addTask" element={<CreateNewTask addNewTask={addNewTask}/>} />
       </Routes>
       <Footer />
