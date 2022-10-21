@@ -63,7 +63,7 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage />
+              <HomePage userData={focusArea}/>
             </PrivateRoute>
           }
         />
