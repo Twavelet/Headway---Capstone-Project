@@ -13,7 +13,6 @@ const EditTask = (props) => {
         const [time, setTime] = useState([])
         const [date, setDate] = useState([])
         const [notes, setNotes] = useState([])
-        const [completed, setCompleted] = useState([])
         const navigate = useNavigate()
         
         async function handleSubmit(event){

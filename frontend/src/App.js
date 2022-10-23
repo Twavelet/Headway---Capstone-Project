@@ -18,6 +18,8 @@ import CreateNewTask from "./components/CreateNewTask/CreateNewTask";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "./hooks/useAuth";
+import Progress from "./components/Progress/Progress";
+
 
 
 function App() {
@@ -31,15 +33,18 @@ function App() {
   "notes": "Test",
   "completed": false
 }]]);
-const [parentCount, setParentCount] = useState([])
+
+  const [progress, setProgress] = useState([])
+  const [parentCount, setParentCount] = useState([])
     
     
     
 
     useEffect(() => {
     
-        fetchFocusArea()
+        fetchFocusArea() && fetchProgress()
         console.log(focusArea)
+        console.log(progress)
         
       }, [token, parentCount]);
     
@@ -56,12 +61,29 @@ const [parentCount, setParentCount] = useState([])
           console.log(error.response.data);
         }
       };
+      const fetchProgress = async () => {
+        try {
+          let response = await axios.get("http://127.0.0.1:8000/progress/get/", {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          });
+          setProgress(response.data);
+        } catch (error) {
+          console.log(error.response.data);
+        }
+      };
 
   function addNewTask(task){
         let tempTask = [task, ...focusArea]
         setFocusArea(tempTask);
     }
 
+  function addNewProgress(measurement){
+      // for GET request update on main screen
+      let tempProgress = [measurement, ...progress]
+      setProgress(tempProgress);
+  }
   
 
   return (
@@ -78,8 +100,9 @@ const [parentCount, setParentCount] = useState([])
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/table" element={<FocusAreaTable focusArea={focusArea} setParentCount={setParentCount} />} />
+        <Route path="/table" element={<FocusAreaTable focusArea={focusArea} setParentCount={setParentCount} addNewProgress={addNewProgress}/>} />
         <Route path="/addTask" element={<CreateNewTask addNewTask={addNewTask}/>} />
+        <Route path="/progress" element={<Progress addNewProgress={addNewProgress}/>} />
       </Routes>
       <Footer />
     </div>

@@ -6,6 +6,7 @@ import axios from "axios";
 import EditTask from "../../components/EditTask/EditTask";
 import { useNavigate } from "react-router-dom";
 import moment from 'moment';
+import Progress from "../../components/Progress/Progress";
 
 const FocusAreaTable = (props) => {
 
@@ -14,6 +15,9 @@ const FocusAreaTable = (props) => {
     const [count, setCount] = useState([])
     const [show, setShow] = useState([true])
     const [edit, setEdit] = useState([])
+    const [showProgress, setShowProgress] = useState([true])
+    const [progress, setProgress] = useState([])
+
     const navigate = useNavigate()
     
 
@@ -82,7 +86,17 @@ const FocusAreaTable = (props) => {
     function handleEdit(userInfo) {
         console.log(userInfo)
         setShow(false)
+        setProgress(true)
         setEdit(userInfo)
+        setCount(count+1)
+        props.setParentCount(count + 1)
+    }
+    
+    function handleProgress(userInfo) {
+        console.log(userInfo)
+        setShowProgress(false)
+        setShow(true)
+        setProgress(userInfo)
         setCount(count+1)
         props.setParentCount(count + 1)
     }
@@ -139,7 +153,7 @@ const FocusAreaTable = (props) => {
     
     return(
         <><> 
-        {show ? (
+        {show && showProgress ? (
                 <><div className="container">
                 <h1>Welcome Back {user.username}!</h1>
             </div><table className="table table-striped bg-info p-2 text-dark bg-opacity-10">
@@ -151,6 +165,7 @@ const FocusAreaTable = (props) => {
                             <th scope="col">Day</th>
                             <th scope="col">Notes</th>
                             <th scope="col">Completion</th>
+                            <th scope="col">Progress</th>
                             <th scope="col">Delete</th>
                             <th scope="col">Edit</th>
                         </tr>
@@ -164,6 +179,7 @@ const FocusAreaTable = (props) => {
                                 <td>{entry.day_of_week}</td>
                                 <td>{entry.notes}</td>
                                 <td><input type="checkbox" onClick={()=> handleTime(entry)}/></td>
+                                <td><button onClick={() => handleProgress(entry)}>Add Progress</button></td>
                                 <td><button onClick={() => handleDelete(entry)}>Delete</button></td>
                                 <td><button onClick={() => handleEdit(entry)}>Edit</button></td>
                                 
@@ -171,7 +187,7 @@ const FocusAreaTable = (props) => {
                         );
                     })}
                 </table></>
-                    ) : (<EditTask userInfo={edit}/>)
+                    ) : !show && progress ? (<EditTask userInfo={edit}/>) : show && !showProgress ? (<Progress addNewProgress={props.addNewProgress} progress={progress}/>) : null
         } 
 
 
