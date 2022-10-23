@@ -12,7 +12,7 @@ from .serializers import ProgressTrackerSerializer
 @permission_classes([IsAuthenticated])
 def get_user_progress(request):
     if request.method == 'GET':
-        progress_tracker = ProgressTracker.objects.filter(focus_area_id=request.user.id)
+        progress_tracker = ProgressTracker.objects.all()
         # either (focus_area_id=request.id) OR (focus_area_id=request.user.id)
         serializer = ProgressTrackerSerializer(progress_tracker, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

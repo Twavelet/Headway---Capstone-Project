@@ -34,7 +34,7 @@ function App() {
   "completed": false
 }]]);
 
-  const [progress, setProgress] = useState([])
+  const [parentProgress, setParentProgress] = useState([])
   const [parentCount, setParentCount] = useState([])
     
     
@@ -44,7 +44,7 @@ function App() {
     
         fetchFocusArea() && fetchProgress()
         console.log(focusArea)
-        console.log(progress)
+        console.log(parentProgress)
         
       }, [token, parentCount]);
     
@@ -68,7 +68,7 @@ function App() {
               Authorization: "Bearer " + token,
             },
           });
-          setProgress(response.data);
+          setParentProgress(response.data);
         } catch (error) {
           console.log(error.response.data);
         }
@@ -81,8 +81,8 @@ function App() {
 
   function addNewProgress(measurement){
       // for GET request update on main screen
-      let tempProgress = [measurement, ...progress]
-      setProgress(tempProgress);
+      let tempProgress = [measurement, ...parentProgress]
+      setParentProgress(tempProgress);
   }
   
 
@@ -100,9 +100,9 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/table" element={<FocusAreaTable focusArea={focusArea} setParentCount={setParentCount} addNewProgress={addNewProgress}/>} />
+        <Route path="/table" element={<FocusAreaTable focusArea={focusArea} setParentCount={setParentCount} parentCount={parentCount} addNewProgress={addNewProgress} parentProgress={parentProgress}/>} />
         <Route path="/addTask" element={<CreateNewTask addNewTask={addNewTask}/>} />
-        <Route path="/progress" element={<Progress addNewProgress={addNewProgress}/>} />
+        <Route path="/progress" element={<Progress addNewProgress={addNewProgress} parentProgress={parentProgress}  setParentCount={setParentCount}/>} />
       </Routes>
       <Footer />
     </div>

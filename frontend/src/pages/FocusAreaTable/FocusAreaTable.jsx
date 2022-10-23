@@ -99,6 +99,7 @@ const FocusAreaTable = (props) => {
         setProgress(userInfo)
         setCount(count+1)
         props.setParentCount(count + 1)
+        console.log(props.parentProgress)
     }
 
    
@@ -187,7 +188,7 @@ const FocusAreaTable = (props) => {
                         );
                     })}
                 </table></>
-                    ) : !show && progress ? (<EditTask userInfo={edit}/>) : show && !showProgress ? (<Progress addNewProgress={props.addNewProgress} progress={progress}/>) : null
+                    ) : !show && progress ? (<EditTask userInfo={edit}/>) : show && !showProgress ? (<Progress addNewProgress={props.addNewProgress} parentProgress={props.parentProgress} parentCount={props.parentCount} setParentCount={props.setParentCount} userProgress ={progress}/>) : null
         } 
 
 
