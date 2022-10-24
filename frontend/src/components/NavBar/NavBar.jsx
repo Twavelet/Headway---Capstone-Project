@@ -10,41 +10,29 @@ const Navbar = () => {
   return (
     <div className="navBar">
       <ul>
+        <li className="fA">
+          {user ? (
+            <button onClick={() => navigate("/table")}>Focus Areas</button>
+          ) : null}
+        </li>
+        <li className="add">
+          {user ? (
+            <button onClick={() => navigate("/addTask")}>Add Task</button>
+          ) : null}
+        </li>
         <li className="brand">
-          <Link to="/" style={{ textDecoration: "none", color: "white"}}>
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
             <b>Headway</b>
             {/* need to center this */}
           </Link>
         </li>
-        <li>
-          {user ? (
-            <button onClick={() => navigate("/table")}>Focus Areas</button>
-          ) : (
-            null
-          )}
-        </li>
-        <li>
-          {user ? (
-            <button onClick={() => navigate("/addTask")}>Add Task</button>
-          ) : (
-            null
-          )}
-        </li>
-        <li>
-          {user ? (
-            <button onClick={() => navigate("/progress")}>View Progress</button>
-          ) : (
-            null
-          )}
-        </li>
-        <li>
+        <li className="login">
           {user ? (
             <button onClick={logoutUser}>Logout</button>
           ) : (
             <button onClick={() => navigate("/login")}>Login</button>
           )}
         </li>
-        
       </ul>
     </div>
   );

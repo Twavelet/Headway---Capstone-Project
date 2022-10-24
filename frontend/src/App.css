@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
 *,
-*::before,
+*::before{
+  background-color: whitesmoke;
+},
 *::after {
   margin: 0;
   padding: 0;
@@ -46,6 +48,8 @@ button:hover {
   flex-direction: column;
   justify-content: flex-end;
   gap: 1rem;
+  padding-top: 5%;
+  
 }
 
 .form input {
@@ -56,3 +60,8 @@ button:hover {
   padding: 3px 7px;
   font-size: 17px;
 }
+
+/* .loginContainer{
+  background-image: url("C:\Users\trevo\Pictures/capstone.jpg");
+  background-size: cover;
+} */

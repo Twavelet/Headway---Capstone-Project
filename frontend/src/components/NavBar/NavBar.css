@@ -1,6 +1,6 @@
 ul {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-evenly; 
   list-style-type: none;
 }
 
@@ -9,27 +9,39 @@ li {
 }
 
 .navBar {
-  background: steelblue;
-  box-shadow: 4px 2px 5px gray;
+  background: whitesmoke;
+  /* box-shadow: 4px 2px 5px gray; */
   color: white;
-  margin-bottom: 2rem;
+/* padding-bottom: 10%; */
   padding: 1.5rem 2rem;
 }
 
 .navBar button {
   background: transparent;
   border: 2px solid white;
-  color: white;
+  color: rgb(48, 47, 47);
   padding: 0.4rem 0.5rem;
+}
+
+.login{
+  padding-left: 20%;
+}
+
+.fA{
+  padding-right: 9%;
 }
 
 .navBar button:hover {
   background: white;
-  color: steelblue;
+  color:rgb(48, 47, 47);
   cursor: pointer;
 }
 
 .brand {
   cursor: pointer;
   font-size: 2rem;
+  text-align: center;
+  padding-right: 10%;
+  padding-left: 10%;
+  color: rgb(48, 47, 47);
 }

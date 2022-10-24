@@ -47,22 +47,24 @@ const LoginPage = () => {
   console.log(number)
 
   return (
-    <>
-    <div>
+    <><div className="mainScreen">
+
+    
+    {/* <div>
 
        <>
-       <h2>
+       <h2 className="loginQuote">
             {randomQuote[number].text}
           </h2>
-          <h3>
-              {randomQuote[number].author}
-            </h3>
+          <h3 className="loginAuthor">
+            {`~${randomQuote[number].author}`}
+          </h3>
             </>
        
 
       
-    </div>
-    <div className="container">
+    </div> */}
+    <div className="loginContainer">
         <form className="form" onSubmit={handleSubmit}>
           <label>
             Username:{" "}
@@ -86,7 +88,9 @@ const LoginPage = () => {
           <Link to="/register">Click to register!</Link>
           <button>Login!</button>
         </form>
-      </div></>
+      </div>
+      </div>
+      </>
   );
 };
 

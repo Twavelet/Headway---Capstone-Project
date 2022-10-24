@@ -104,7 +104,7 @@ function App() {
         <Route path="/addTask" element={<CreateNewTask addNewTask={addNewTask}/>} />
         <Route path="/progress" element={<Progress addNewProgress={addNewProgress} parentProgress={parentProgress}  setParentCount={setParentCount}/>} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
