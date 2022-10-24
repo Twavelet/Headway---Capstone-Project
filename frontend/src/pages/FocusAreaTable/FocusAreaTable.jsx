@@ -160,7 +160,7 @@ const FocusAreaTable = (props) => {
 
     setCount(count + 1);
     props.setParentCount(count + 1);
-    navigate("/");
+    // navigate("/");
   }
 
 //   function handleCheck(userCheck) {

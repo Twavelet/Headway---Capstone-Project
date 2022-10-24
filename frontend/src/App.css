@@ -2,7 +2,7 @@
 
 *,
 *::before{
-  background-color: whitesmoke;
+  background-color: #f5f4e6;
 },
 *::after {
   margin: 0;

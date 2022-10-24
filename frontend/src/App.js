@@ -31,10 +31,19 @@ function App() {
   "time_of_task": "14:05:00",
   "day_of_week": "2021-12-31",
   "notes": "Test",
-  "completed": false
+  "completed": false,
+  "color": "red"
 }]]);
 
-  const [parentProgress, setParentProgress] = useState([])
+  const [parentProgress, setParentProgress] = useState([[{
+    "focus_area": "useState Test",
+    "task": "useState Test",
+    "time_of_task": "14:05:00",
+    "day_of_week": "2021-12-31",
+    "notes": "Test",
+    "completed": false,
+    "color": "red"
+  }]])
   const [parentCount, setParentCount] = useState([])
     
     
