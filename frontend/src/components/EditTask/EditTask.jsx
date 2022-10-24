@@ -70,7 +70,7 @@ const EditTask = (props) => {
           />
         </div>
         <div className="form-group">
-          <label>time</label>
+          <label>Time</label>
           <input
             defaultValue={props.userInfo.time_of_task}
             className="form-control"

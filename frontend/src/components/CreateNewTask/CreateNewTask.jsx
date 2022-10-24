@@ -67,7 +67,7 @@ const CreateNewTask = (props) => {
         />
       </div>
       <div className="form-group">
-        <label>time</label>
+        <label>Time</label>
         <input
           placeHolder="Enter the Time for your New Task: "
           className="form-control"
