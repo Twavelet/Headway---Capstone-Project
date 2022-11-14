@@ -3,7 +3,7 @@
 *,
 *::before{
   background-color: #f5f4e6;
-},
+}
 *::after {
   margin: 0;
   padding: 0;
@@ -19,20 +19,26 @@ p {
   font-size: 20px;
 }
 
+ul{
+  list-style-type: none;
+}
+
 button {
   background-color: transparent;
-  border: 2px solid steelblue;
-  color: steelblue;
+  border: 2px solid white;
+  color: rgb(48, 47, 47);
   font-size: 1rem;
   font-family: inherit;
   max-width: 100px;
   padding: 0.5rem 0.5rem;
+  
 }
 
 button:hover {
+  background: white;
+  color:rgb(48, 47, 47);
   cursor: pointer;
-  color: white;
-  background-color: steelblue;
+  list-style-type: none;
 }
 
 .container {

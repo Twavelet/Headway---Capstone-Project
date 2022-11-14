@@ -1,47 +1,42 @@
-ul {
+header {
+  padding: 1 rem;
   display: flex;
-  justify-content:space-evenly; 
-  list-style-type: none;
+  flex-direction: row;
+  justify-content:right;
 }
 
-li {
-  font-size: 1.25rem;
-}
-
-.navBar {
-  background: #f5f4e6;;
-  /* box-shadow: 4px 2px 5px gray; */
-  color: white;
-/* padding-bottom: 10%; */
-  padding: 1.5rem 2rem;
-}
-
-.navBar button {
-  background: transparent;
-  border: 2px solid white;
+header .brand {
+  cursor: pointer;
+  font-size: 3rem;
   color: rgb(48, 47, 47);
-  padding: 0.4rem 0.5rem;
+  padding-right: 46rem;
+} 
+
+ .navBar {
+  background: #f5f4e6;
+  box-shadow: 4px 2px 5px gray;
+  color: white;
+  padding-bottom: 10%;
+  padding: 1.5rem 2rem;
+
+}
+ 
+.navBar b {
+  justify-content: center;
 }
 
-.login{
-  padding-left: 20%;
-}
+header .login {
+  background: transparent;
+  color: rgb(48, 47, 47);
+  justify-content: right;
+} 
 
-.fA{
-  padding-right: 9%;
-}
 
-.navBar button:hover {
+
+/* .navBar button:hover {
   background: white;
   color:rgb(48, 47, 47);
   cursor: pointer;
-}
+} */
 
-.brand {
-  cursor: pointer;
-  font-size: 2rem;
-  text-align: center;
-  padding-right: 10%;
-  padding-left: 10%;
-  color: rgb(48, 47, 47);
-}
+

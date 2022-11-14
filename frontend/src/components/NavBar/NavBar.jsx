@@ -8,9 +8,9 @@ const Navbar = () => {
   const { logoutUser, user } = useContext(AuthContext);
   const navigate = useNavigate();
   return (
-    <div className="navBar">
-      <ul>
-        <li className="fA">
+    <header className="navBar">
+      
+        {/* <li className="fA">
           {user ? (
             <button onClick={() => navigate("/table")}>Focus Areas</button>
           ) : null}
@@ -19,22 +19,26 @@ const Navbar = () => {
           {user ? (
             <button onClick={() => navigate("/addTask")}>Add Task</button>
           ) : null}
-        </li>
-        <li className="brand">
+        </li> */}
+        <div>
+        <nav className="brand">
           <Link to="/" style={{ textDecoration: "none", color: "black" }}>
             <b>Headway</b>
             {/* need to center this */}
           </Link>
-        </li>
-        <li className="login">
+        </nav>
+        </div>
+        <div >
+        <nav className="login">
           {user ? (
             <button onClick={logoutUser}>Logout</button>
           ) : (
             <button onClick={() => navigate("/login")}>Login</button>
           )}
-        </li>
-      </ul>
-    </div>
+        </nav>
+        </div>
+      
+    </header>
   );
 };
 
