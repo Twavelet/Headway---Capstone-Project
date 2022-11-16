@@ -21,6 +21,9 @@ p {
 
 ul{
   list-style-type: none;
+  display: flex;
+  
+
 }
 
 button {
@@ -29,10 +32,12 @@ button {
   color: rgb(48, 47, 47);
   font-size: 1rem;
   font-family: inherit;
-  max-width: 100px;
+  width: 100px;
   padding: 0.5rem 0.5rem;
-  
+  height: 65px;
 }
+
+
 
 button:hover {
   background: white;
